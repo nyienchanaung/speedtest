@@ -1,75 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- The top of file index.html -->
+<html itemscope itemtype="http://schema.org/Article">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Broadband Speed Test That Works on Any Web Browser.Test Internet speed on iPad, iPhone, Android, Smart TV, Xbox, PlayStation, Windows, Mac, Linux etc.THE MOST ACCURATE AND POWERFUL ONLINE BANDWIDTH TEST."/>
-    <title>World Fast Internet Speed Check Application</title>
-
-<script style="text/javascript">
-  document.write('<a style="display:none!important" id="4900111"></a>');
-  if (window.AED_SHOW) {
-    window.AED_SHOW({wid: '4900111',shortkey:'AAIAuzN', size:'468x60', custom:{}});
-  } else {
-    window.AED_ONLOAD = window.AED_ONLOAD || [];
-    window.AED_ONLOAD.push({wid:'4900111',shortkey:'AAIAuzN',size:'468x60',custom:{}});
-    if (!document.getElementById("ae-ad-script-$")) {
-      var s = document.createElement("script"),
-      h = document.getElementsByTagName("head")[0];
-      s.id = 'ae-ad-script-$';
-      s.charset = "utf-8";
-      s.async = !0;
-      s.src = "//i.alicdn.com/ae-game/thirdparty/show-window/index.js";
-      h.insertBefore(s, h.firstChild)
-    }
-  }
-</script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116169953-1"></script>
+  <!-- BEGIN Pre-requisites -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+    <script>
+        function start() {
+          gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+              client_id: '266586599022-61ccfeebt4em6edp56tmq9mtjj8io5ut.apps.googleusercontent.com',
+              // Scopes to request in addition to 'profile' and 'email'
+              scope: 'profile'
+            });
+          });
+        }
+      </script>
+    </head>
+    <body>
+        <button id="signinButton">Sign in with Google</button>
+        <script>
+          $('#signinButton').click(function() {
+            // signInCallback defined in step 6.
+            auth2.grantOfflineAccess().then(signInCallback);
+          });
+        </script>
+        <!-- Last part of BODY element in file index.html -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-116169953-1');
-</script>
-
-
-<style>
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 16px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-        .button2 {
-            background-color: white; 
-            color: black; 
-            border: 2px solid #008CBA;
-        }
-        .button2:hover {
-            background-color: #008CBA;
-            color: white;
-        }
-</style>
-</head>
-<body>
-<div style="text-align:center;">
-   <!--OST Widget code start--><iframe src="https://openspeedtest.com/Get-widget.php" width="735" scrolling="no" height="490" frameborder="0">
-</iframe><br /><div style="text-align:center; width: 725px;"><a  href="http://openspeedtest.com?ref=widget">Powered by openspeedtest.com</a></div><!-- OST Widget code end -->
-    <input class="button button2" type="button" value="Refresh Page" onClick="location.href=location.href">
-
+    function signInCallback(authResult) {
+      if (authResult['code']) {
     
-</div>
-
-</body>
-</html>
+        // Hide the sign-in button now that the user is authorized, for example:
+        $('#signinButton').attr('style', 'display: none');
+    
+        // Send the code to the server
+        $.ajax({
+          type: 'POST',
+          url: 'http://example.com/storeauthcode',
+          // Always include an `X-Requested-With` header in every AJAX request,
+          // to protect against CSRF attacks.
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          contentType: 'application/octet-stream; charset=utf-8',
+          success: function(result) {
+            // Handle or verify the server response.
+          },
+          processData: false,
+          data: authResult['code']
+        });
+      } else {
+        // There was an error.
+      }
+    }
+    </script>
+    </body>
+    </html>
